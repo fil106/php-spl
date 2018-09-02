@@ -6,7 +6,10 @@
 </head>
 <body>
 
-    <p>Open console!</p>
+    <h1>Чат</h1>
+    <input id="inputMessage" type="text" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button><br><br>
+
     <button id="last-message" onclick="getLastMessage()">Вывести последнее сообщение</button>
     <div class="notification"></div>
 
@@ -24,6 +27,14 @@
 
         function getLastMessage() {
             conn.send("last-message");
+        }
+
+        function sendMessage() {
+            var inputMessage = document.getElementById('inputMessage');
+            if(inputMessage !== '') {
+                conn.send(inputMessage.value);
+                inputMessage.value = '';
+            }
         }
 
     </script>
