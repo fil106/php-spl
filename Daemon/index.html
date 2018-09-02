@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket</title>
+</head>
+<body>
+
+    <p>Open console!</p>
+    <button id="last-message" onclick="getLastMessage()">Вывести последнее сообщение</button>
+    <div class="notification"></div>
+
+    <script>
+
+        var conn = new WebSocket('ws://127.0.0.1:8080');
+        conn.onopen = function(e) {
+            console.log("Connection established!");
+        };
+
+        conn.onmessage = function(e) {
+            console.log(e.data);
+            document.getElementsByClassName('notification')[0].innerHTML = "<b>Последнее сообщение: </b><br>" + e.data;
+        };
+
+        function getLastMessage() {
+            conn.send("last-message");
+        }
+
+    </script>
+</body>
+</html>
